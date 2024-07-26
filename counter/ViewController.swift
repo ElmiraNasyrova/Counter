@@ -7,17 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
 //    UI Elements
-    @IBOutlet weak var counterLabel: UILabel!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
-    @IBOutlet weak var historyView: UITextView!
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var minusButton: UIButton!
+    @IBOutlet private weak var plusButton: UIButton!
+    @IBOutlet private weak var resetButton: UIButton!
+    @IBOutlet private weak var historyView: UITextView!
     
 //    Variables
-    private var count: Int = 0
+    private var count: Int = .zero
     private var formattedDate: String {
         return "\(Date.now.formatted(date: .numeric, time: .standard)) UTC"
     }
@@ -29,8 +29,9 @@ class ViewController: UIViewController {
         counterLabel.textColor = .systemIndigo
         counterLabel.font = .boldSystemFont(ofSize: 20)
         historyView.text = "История изменений:"
-        historyView.font = .boldSystemFont(ofSize: 16)
+        historyView.font = .boldSystemFont(ofSize: 26)
         historyView.textColor = .systemIndigo
+        historyView.isFindInteractionEnabled = false
         plusButton.backgroundColor = .systemTeal
         plusButton.tintColor = .red
         minusButton.backgroundColor = .systemTeal
@@ -57,8 +58,7 @@ class ViewController: UIViewController {
         if count >= 0 {
             counterLabel.text = "Значение счетчика: \(count)"
             historyView.text = "\(formattedDate): значение изменено на -1"
-        }
-        else {
+        } else {
             count = 0
             counterLabel.text = "Значение счетчика: \(count)"
             historyView.text = "\(formattedDate): попытка уменьшить значение счётчика ниже 0"
